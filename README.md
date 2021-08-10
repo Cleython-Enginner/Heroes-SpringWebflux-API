@@ -1,4 +1,6 @@
-Executar dynamo: 
+# Projeto realizado no Boootcamp Java Developer
+
+
 
  java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
  
