@@ -1,9 +1,7 @@
 package com.digitalinnovation.livecoding.controller;
 
 import com.digitalinnovation.livecoding.document.Heroes;
-import com.digitalinnovation.livecoding.repository.HeroesRepository;
 import com.digitalinnovation.livecoding.repository.VillainsRepository;
-import com.digitalinnovation.livecoding.service.HeroesService;
 import com.digitalinnovation.livecoding.service.VillainsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static com.digitalinnovation.livecoding.constants.HeroesConstant.VILLAINS_ENDPOINT_LOCAL;
+
 import static com.digitalinnovation.livecoding.constants.VillainsConstant.VILLAINS_ENDPOINT_LOCAL;
 
 @RestController
@@ -32,16 +30,16 @@ public class VillainsController {
 
     @GetMapping(VILLAINS_ENDPOINT_LOCAL)
     @ResponseStatus(HttpStatus.OK)
-    public Flux<Heroes> getAllItems() {
-        log.info("requesting the list off all heroes");
+    public Flux<Villains> getAllItems() {
+        log.info("requesting the list off all villain");
         return villainsService.findAll();
 
     }
 
 
     @GetMapping(VILLAINS_ENDPOINT_LOCAL + "/{id}")
-    public Mono<ResponseEntity<Villains>> findByIdHero(@PathVariable String id) {
-        log.info("Requesting the hero with id {}", id);
+    public Mono<ResponseEntity<Villains>> findByIdVillain(@PathVariable String id) {
+        log.info("Requesting the villain with id {}", id);
         return villainsService.findByIdVillain(id)
                 .map((item) -> new ResponseEntity<>(item, HttpStatus.OK))
                 .defaultIfEmpty(new ResponseEntity<>(HttpStatus.NOT_FOUND));
@@ -49,17 +47,17 @@ public class VillainsController {
 
     @PostMapping(VILLAINS_ENDPOINT_LOCAL)
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Villains> createHero(@RequestBody Villains villains) {
-        log.info("A new Hero was Created");
-        return heroesService.save(villains);
+    public Mono<Villains> createVillain(@RequestBody Villains villains) {
+        log.info("A new Villain was Created");
+        return villainsService.save(villains);
 
     }
 
     @DeleteMapping(VILLAINS_ENDPOINT_LOCAL + "/{id}")
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     public Mono<HttpStatus> deletebyIDVillain(@PathVariable String id) {
-        heroesService.deletebyIDHero(id);
-        log.info("Deleting the hero with id {}", id);
+        villainsService.deletebyIDVillain(id);
+        log.info("Deleting the villain with id {}", id);
         return Mono.just(HttpStatus.NOT_FOUND);
     }
 }
