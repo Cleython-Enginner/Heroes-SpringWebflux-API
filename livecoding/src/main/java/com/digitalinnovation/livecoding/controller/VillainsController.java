@@ -1,6 +1,6 @@
 package com.digitalinnovation.livecoding.controller;
 
-import com.digitalinnovation.livecoding.document.Heroes;
+import com.digitalinnovation.livecoding.document.Villains;
 import com.digitalinnovation.livecoding.repository.VillainsRepository;
 import com.digitalinnovation.livecoding.service.VillainsService;
 import lombok.extern.slf4j.Slf4j;
